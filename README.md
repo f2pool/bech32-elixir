@@ -1,6 +1,12 @@
 # Bech32
 
-**TODO: Add description**
+  This is an implementation of BIP-0173
+
+  Bech32 address format for native v0-16 witness outputs.
+
+  See https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki for details
+  
+  This library was implemented with Bitcoin and Nervos CKB in mind.
 
 ## Installation
 
@@ -10,7 +16,7 @@ by adding `bech32` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:bech32, "~> 0.1.0"}
+    {:bech32, "~> 1.0.0"}
   ]
 end
 ```
