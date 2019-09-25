@@ -23,7 +23,7 @@ defmodule Bech32.MixProject do
   defp package() do
     [
       name: "bech32",
-      files: ~w(lib priv .formatter.exs mix.exs README* readme* LICENSE* license* CHANGELOG* changelog* src),
+      files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/edescourtis/bech32"},
     ]

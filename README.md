@@ -16,7 +16,8 @@ by adding `bech32` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:bech32, "~> 1.0.0"}
+    {:bech32, "~> 1.0.0"},
+    {:ex_doc, "~> 0.14", only: :dev, runtime: false}
   ]
 end
 ```
