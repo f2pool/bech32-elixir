@@ -11,7 +11,7 @@ defmodule Bech32.MixProject do
       description: description(),
       package: package(),
       name: "Bech32",
-      source_url: "https://github.com/edescourtis/bech32",
+      source_url: "https://github.com/f2pool/bech32-elixir",
       deps: deps()
     ]
   end
@@ -25,7 +25,7 @@ defmodule Bech32.MixProject do
       name: "bech32",
       files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/edescourtis/bech32"},
+      links: %{"GitHub" => "https://github.com/f2pool/bech32-elixir"},
     ]
   end
 
