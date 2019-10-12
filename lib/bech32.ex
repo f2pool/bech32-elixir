@@ -256,8 +256,8 @@ defmodule Bech32 do
   """
   @spec decode(String.t(), keyword) :: {:ok, hrp :: String.t(), data :: binary} |
     {:error,
-      :no_seperator | :no_hrp | :checksum_too_short | :too_long | :not_in_charset |
-      :checksum_failed | :invalid_char | :mixed_case_char | :invalid_char
+      :no_separator | :no_hrp | :checksum_too_short | :too_long | :not_in_charset |
+      :checksum_failed | :invalid_char | :mixed_case_char
     }
   def decode(addr, opts \\ []) when is_binary(addr) do
     unless Enum.any?(:erlang.binary_to_list(addr), fn c -> c < ?! or c > ?~ end) do
@@ -265,7 +265,7 @@ defmodule Bech32 do
         addr = String.downcase(addr)
         data_part = ~r/.+(1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]+)$/ |> Regex.run(addr)
         case ~r/.+(1.+)$/ |> Regex.run(addr, return: :index) do
-          nil -> {:error, :no_seperator}
+          nil -> {:error, :no_separator}
           [_, {last_one_pos, _tail_size_including_one}] ->
             cond do
               last_one_pos === 0 ->
@@ -332,7 +332,7 @@ defmodule Bech32 do
   @spec segwit_decode(hrp :: String.t(), addr :: String.t()) :: {:ok, witver :: non_neg_integer, data :: binary} |
     {:error,
       :invalid_size | :invalid_witness_version | :wrong_hrp | :no_seperator | :no_hrp | :checksum_too_short |
-      :too_long | :not_in_charset | :checksum_failed | :invalid_char | :mixed_case_char | :invalid_char
+      :too_long | :not_in_charset | :checksum_failed | :invalid_char | :mixed_case_char
     }
   def segwit_decode(hrp, addr) when is_binary(hrp) and is_binary(addr) do
     case decode(addr) do
