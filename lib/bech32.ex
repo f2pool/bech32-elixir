@@ -48,9 +48,9 @@ defmodule Bech32 do
   defp polymod(values) when is_list(values) do
     values |> Enum.reduce(1, fn v, chk ->
       b = (chk >>> 25)
-      chk = ((chk &&& 0x1ffffff) <<< 5) ^^^ v
+      chk = Bitwise.bxor(((chk &&& 0x1ffffff) <<< 5), v)
       0..4 |> Enum.reduce(chk, fn i, chk ->
-        chk ^^^ (if ((b >>> i) &&& 1) !== 0, do: @gen |> elem(i), else: 0)
+        Bitwise.bxor(chk, (if ((b >>> i) &&& 1) !== 0, do: @gen |> elem(i), else: 0))
       end)
     end)
   end
@@ -153,7 +153,7 @@ defmodule Bech32 do
   def create_checksum(hrp, data) when is_binary(hrp) and is_binary(data) do
     data = :erlang.binary_to_list(data)
     values = hrp_expand(hrp) ++ data
-    pmod = polymod(values ++ [0,0,0,0,0,0]) ^^^ 1
+    pmod = Bitwise.bxor(polymod(values ++ [0,0,0,0,0,0]), 1)
     (for i <- 0..5, do: (pmod >>> 5 * (5 - i)) &&& 31) |> :erlang.list_to_binary()
   end
 
